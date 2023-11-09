@@ -32,15 +32,10 @@ public class UserController {
         System.out.println("deu boa");
     }
 
-    @PostMapping("")
+    @PostMapping("/newuser")
     public void newUser(@RequestBody UserModel newUser){
-        UserService.save(
-        (String) newUser.getName(), 
-        (Date) newUser.getBirthday(), 
-        (String) newUser.getEmail(), 
-        (String) newUser.getPassword(),
-        (String) newUser.getTypeUser(),
-        (String) newUser.getGenre());
+        System.out.println(newUser);
+        UserService.save(newUser);
     }
     
     

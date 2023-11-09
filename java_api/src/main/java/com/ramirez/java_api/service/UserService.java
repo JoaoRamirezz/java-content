@@ -14,12 +14,12 @@ public class UserService {
     @Autowired
     private UserRepository userRepository;
 
-    public UserModel update(UserModel userModel){
+    public UserModel save(UserModel userModel){
         return this.userRepository.save(userModel);
     }
 
-    public void save(String name, Date birthday, String email, String password, String typeUser, String genre){
-        this.userRepository.save(new UserModel(name, birthday, email, password, typeUser, genre));
+    public void save(String name, String email, String password, String typeUser, String genre, String cpf){
+        this.userRepository.save(new UserModel(name, email, password, typeUser, genre, cpf));
     }
 
     public List<UserModel> findAll(){
