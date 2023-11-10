@@ -1,12 +1,8 @@
-import {
-  StyleSheet,
-  Text,
-  View,
-  TextInput,
-  TouchableOpacity,
-} from "react-native";
+import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
 import { useState } from "react";
 import axios from "axios";
+import { Picker } from "@react-native-picker/picker";
+import { PaperProvider, TextInput } from "react-native-paper";
 
 export function SignUp(props) {
   const [name, setNome] = useState("");
@@ -18,16 +14,15 @@ export function SignUp(props) {
   const [genre, setGenre] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
 
+  const genres = ["Masculine", "Feminine", "Other"];
+  const typeUser = ["Musician", "Producer", "Event Organizer", "Other"];
+
   const signUp = async () => {
     console.log("deu boa 2");
 
-    // Password didn't match
-    if (password !== confirmPassword){
-      console.log("senhas diferentes")
-    };
-
-    // // Invalid data
-    // if (!name || !age || !email || !password || !cpf) return;
+    if (password !== confirmPassword) {
+      console.log("senhas diferentes");
+    }
 
     const data = {
       name,
@@ -48,80 +43,68 @@ export function SignUp(props) {
 
   return (
     <View style={styleSignUp.bg}>
-      <View style={styleSignUp.inputs1}>
-        <View>
-          <Text style={styleSignUp.textView}>Name: </Text>
-          <TextInput
-            style={styleSignUp.input}
-            maxLength={20}
-            onChangeText={(text) => setNome(text)}
-          />
-        </View>
-      </View>
+      <TextInput
+        mode="outlined"
+        label="Name"
+        style={styleSignUp.input}
+        maxLength={20}
+        onChangeText={(text) => setNome(text)}
+      />
 
-      <View style={styleSignUp.inputs1}>
-        <View>
-          <Text style={styleSignUp.textView}>Email:</Text>
-          <TextInput
-            style={styleSignUp.input}
-            onChangeText={(text) => setEmail(text)}
-          />
-        </View>
+      <TextInput
+        mode="outlined"
+        label="E-mail"
+        style={styleSignUp.input}
+        onChangeText={(text) => setEmail(text)}
+      />
 
-        <View>
-          <Text style={styleSignUp.textView}>Password:</Text>
-          <TextInput
-            style={styleSignUp.input}
-            onChangeText={(text) => setPassword(text)}
-          />
-        </View>
+      <TextInput
+        mode="outlined"
+        label="Password"
+        style={styleSignUp.input}
+        onChangeText={(text) => setPassword(text)}
+        secureTextEntry={true}
+      />
 
-        <View>
-          <Text style={styleSignUp.textView}>Confirm Password:</Text>
-          <TextInput
-            style={styleSignUp.input}
-            onChangeText={(text) => setConfirmPassword(text)}
-          />
-        </View>
-      </View>
+      <TextInput
+        mode="outlined"
+        label="Confirm Password"
+        style={styleSignUp.input}
+        onChangeText={(text) => setConfirmPassword(text)}
+        secureTextEntry={true}
+      />
 
-      <View>
-        <Text style={styleSignUp.textView}>User Type:</Text>
-        <TextInput
-          style={styleSignUp.input}
-          maxLength={20}
-          onChangeText={(text) => setType(text)}
-        />
-      </View>
+      <Picker style={styleSignUp.pickerStyles}>
+        <Picker.Item label="Producer" value="Producer" />
+        <Picker.Item label="Musician" value="Musician" />
+        <Picker.Item label="Event Organizer" value="Event Organizer" />
+        <Picker.Item label="Other" value="Other" />
+      </Picker>
 
-      <View>
-        <Text style={styleSignUp.textView}>Genre:</Text>
-        <TextInput
-          style={styleSignUp.input}
-          maxLength={20}
-          onChangeText={(text) => setGenre(text)}
-        />
-      </View>
+      <TextInput
+        mode="outlined"
+        label="CPF"
+        style={styleSignUp.input}
+        maxLength={20}
+        onChangeText={(text) => setCPF(text)}
+      />
 
-      <View>
-        <Text style={styleSignUp.textView}>CPF:</Text>
-        <TextInput
-          style={styleSignUp.input}
-          maxLength={20}
-          onChangeText={(text) => setCPF(text)}
-        />
-      </View>
+      <Picker style={styleSignUp.pickerStyles}>
+        <Picker.Item label="Feminine" value="Feminine" />
+        <Picker.Item label="Masculine" value="Masculine" />
+        <Picker.Item label="Other" value="Other" />
+      </Picker>
 
       <View style={styleSignUp.buttonLogin}>
         <TouchableOpacity style={styleSignUp.button} onPress={() => signUp()}>
-          <Text style={styleSignUp.textbutton}>Cadastrar</Text>
+          <Text style={styleSignUp.textbutton}>Sign Up</Text>
         </TouchableOpacity>
 
         <TouchableOpacity
           style={styleSignUp.button1}
-          onPress={() => props.navigation.navigate("Login")}
+          onPress={() => props.navigation.navigate("StartPage")}
         >
-          <Text style={styleSignUp.textbutton}>Cancelar</Text>
+          <Text style={styleSignUp.textbutton}>Cancel</Text>
         </TouchableOpacity>
       </View>
     </View>
@@ -130,18 +113,26 @@ export function SignUp(props) {
 
 const styleSignUp = StyleSheet.create({
   bg: {
-    backgroundColor: "#36CECC",
     height: "100%",
     display: "flex",
   },
 
+  pickerStyles: {
+    marginHorizontal: 40,
+    marginTop: 30,
+    padding: 10,
+    height: 50,
+    borderRadius: 5,
+    borderColor: "gray",
+    borderWidth: 1,
+  },
+
   input: {
     marginHorizontal: 40,
-    marginTop: 10,
-    padding: 10,
-    backgroundColor: "#65F4F2",
-    height: 45,
-    borderRadius: 20,
+    marginTop: 30,
+    padding: 0,
+    height: 50,
+    borderRadius: 5,
   },
 
   textView: {

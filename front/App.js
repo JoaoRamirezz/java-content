@@ -7,13 +7,8 @@ import { useState } from "react";
 // import {Filter} from "./pages/Filter/Filter"
 // import {SelectedHotel} from "./pages/SelectedHotel/SelectedHotel"
 // import { UserPage } from "./pages/UserPage/userpage";
-import {
-  StartScreen,
-  LoginScreen,
-  RegisterScreen,
-  ResetPasswordScreen,
-  Dashboard,
-} from "./src/screens";
+import { SignUp } from "./src/pages/SignUp";
+import StartPage from "./src/pages/StartPage";
 
 export default function App() {
   const Stack = createStackNavigator();
@@ -22,20 +17,9 @@ export default function App() {
   return (
     <utilsContext.Provider value={{ data, setData }}>
       <NavigationContainer>
-        <Stack.Navigator
-          initialRouteName="StartScreen"
-          screenOptions={{
-            headerShown: false,
-          }}
-        >
-          <Stack.Screen name="StartScreen" component={StartScreen} />
-          <Stack.Screen name="LoginScreen" component={LoginScreen} />
-          <Stack.Screen name="RegisterScreen" component={RegisterScreen} />
-          <Stack.Screen name="Dashboard" component={Dashboard} />
-          <Stack.Screen
-            name="ResetPasswordScreen"
-            component={ResetPasswordScreen}
-          />
+        <Stack.Navigator>
+          <Stack.Screen name="StartPage" component={StartPage} />
+          <Stack.Screen name="Register" component={SignUp} />
         </Stack.Navigator>
       </NavigationContainer>
     </utilsContext.Provider>
