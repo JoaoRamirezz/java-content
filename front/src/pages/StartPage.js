@@ -24,7 +24,7 @@ export default function StartPage(props) {
         />
 
         <View style={styleStartPage.options}>
-          <TouchableOpacity style={styleStartPage.button}>
+          <TouchableOpacity style={styleStartPage.button} onPress={() => props.navigation.navigate("Login")}>
             <Text style={styleStartPage.textButton}>Login</Text>
           </TouchableOpacity>
 

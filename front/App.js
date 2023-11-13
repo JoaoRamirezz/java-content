@@ -9,6 +9,8 @@ import { useState } from "react";
 // import { UserPage } from "./pages/UserPage/userpage";
 import { SignUp } from "./src/pages/SignUp";
 import StartPage from "./src/pages/StartPage";
+import Login from "./src/pages/Login";
+import HomePage from "./src/pages/HomePage";
 
 export default function App() {
   const Stack = createStackNavigator();
@@ -18,8 +20,10 @@ export default function App() {
     <utilsContext.Provider value={{ data, setData }}>
       <NavigationContainer>
         <Stack.Navigator>
+          <Stack.Screen name="Home" component={HomePage} />
           <Stack.Screen name="StartPage" component={StartPage} />
           <Stack.Screen name="Register" component={SignUp} />
+          <Stack.Screen name="Login" component={Login} />
         </Stack.Navigator>
       </NavigationContainer>
     </utilsContext.Provider>

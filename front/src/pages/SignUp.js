@@ -6,7 +6,6 @@ import { PaperProvider, TextInput } from "react-native-paper";
 
 export function SignUp(props) {
   const [name, setNome] = useState("");
-  const [age, setAge] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [cpf, setCPF] = useState("");
@@ -42,6 +41,7 @@ export function SignUp(props) {
   };
 
   return (
+    
     <View style={styleSignUp.bg}>
       <TextInput
         mode="outlined"
@@ -53,25 +53,17 @@ export function SignUp(props) {
 
       <TextInput
         mode="outlined"
+        label="Username"
+        style={styleSignUp.input}
+        maxLength={20}
+        onChangeText={(text) => setNome(text)}
+      />
+
+      <TextInput
+        mode="outlined"
         label="E-mail"
         style={styleSignUp.input}
         onChangeText={(text) => setEmail(text)}
-      />
-
-      <TextInput
-        mode="outlined"
-        label="Password"
-        style={styleSignUp.input}
-        onChangeText={(text) => setPassword(text)}
-        secureTextEntry={true}
-      />
-
-      <TextInput
-        mode="outlined"
-        label="Confirm Password"
-        style={styleSignUp.input}
-        onChangeText={(text) => setConfirmPassword(text)}
-        secureTextEntry={true}
       />
 
       <Picker style={styleSignUp.pickerStyles}>
@@ -94,6 +86,23 @@ export function SignUp(props) {
         <Picker.Item label="Masculine" value="Masculine" />
         <Picker.Item label="Other" value="Other" />
       </Picker>
+
+      
+      <TextInput
+        mode="outlined"
+        label="Password"
+        style={styleSignUp.input}
+        onChangeText={(text) => setPassword(text)}
+        secureTextEntry={true}
+      />
+
+      <TextInput
+        mode="outlined"
+        label="Confirm Password"
+        style={styleSignUp.input}
+        onChangeText={(text) => setConfirmPassword(text)}
+        secureTextEntry={true}
+      />
 
       <View style={styleSignUp.buttonLogin}>
         <TouchableOpacity style={styleSignUp.button} onPress={() => signUp()}>
