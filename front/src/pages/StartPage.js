@@ -3,13 +3,15 @@ import {
   StyleSheet,
   ImageBackground,
   View,
-  Button,
   TouchableOpacity,
   Text,
 } from "react-native";
 
 import { ImSoundcloud } from "react-icons/im";
 import { BiLogoGmail } from "react-icons/bi";
+
+import ButtonIcon from "../components/ButtonIcon";
+import Button from "../components/Button";
 
 export default function StartPage(props) {
   return (
@@ -20,33 +22,39 @@ export default function StartPage(props) {
       >
         <Image
           source={require("../../assets/Logo.png")}
-          style={styleStartPage.image}
-        />
+          style={styleStartPage.image} />
 
         <View style={styleStartPage.options}>
-          <TouchableOpacity style={styleStartPage.button} onPress={() => props.navigation.navigate("Login")}>
-            <Text style={styleStartPage.textButton}>Login</Text>
-          </TouchableOpacity>
 
-          <TouchableOpacity style={styleStartPage.buttonSoundCloud}>
-            <Text style={styleStartPage.textButton}>
-              <ImSoundcloud style={styleStartPage.icon} /> SoundCloud
-            </Text>
-          </TouchableOpacity>
+          <Button
+            
+            navigateTo="Login"
+            text="Login"
+            color="#3786e4"
+            textColor="white"
+          />
 
-          <TouchableOpacity style={styleStartPage.buttonGmail}>
-            <Text style={styleStartPage.textButtonGmail}>
-              <BiLogoGmail style={styleStartPage.iconGmail} />
-              Gmail
-            </Text>
-          </TouchableOpacity>
+          <ButtonIcon
+            color="#ff7700"
+            textColor="white"
+            top={50}
+            icon={<ImSoundcloud style={styleStartPage.icon} />}
+            text="SoundCloud"
+            iconColor="white"
+          />
+
+          <ButtonIcon
+            color="white"
+            textColor="red"
+            top={10}
+            icon={<BiLogoGmail style={styleStartPage.iconGmail} />}
+            text="Gmail"
+          />
 
           <Text style={styleStartPage.textButtonLogin}>
             Don't have any account?
             <TouchableOpacity onPress={() => props.navigation.navigate("Register")}>
-              <b>
-                Sign Up!
-              </b>
+              <b> Sign Up! </b>
             </TouchableOpacity>
           </Text>
         </View>
@@ -63,67 +71,26 @@ const styleStartPage = StyleSheet.create({
     fontSize: 30,
     color: "red",
   },
-
-  textButton: {
-    textAlign: "center",
-    alignItems: "center",
-    display: "flex",
-    justifyContent: "center",
-    color: "white",
-    fontSize: 17,
-  },
-
-  textButtonGmail: {
-    textAlign: "center",
-    alignItems: "center",
-    display: "flex",
-    justifyContent: "center",
-    color: "black",
-    fontSize: 17,
-  },
+  
   textButtonLogin: {
-    marginTop:5,
+    marginTop: 5,
     textAlign: "center",
     color: "white",
     fontSize: 13,
   },
 
   image: {
+    alignSelf: "center",
     width: 250,
     height: 275,
-    marginHorizontal: "9vh",
   },
 
   container: {
-    height: "100vh",
+    height: "100vh"
   },
 
   bg: {
     flex: 1,
     justifyContent: "center",
-  },
-
-  button: {
-    padding: 15,
-    marginHorizontal: 40,
-    marginTop: 10,
-    backgroundColor: "#3786E4",
-    borderRadius: 15,
-  },
-
-  buttonSoundCloud: {
-    padding: 15,
-    marginHorizontal: 40,
-    marginTop: 50,
-    backgroundColor: "#ff7700",
-    borderRadius: 15,
-  },
-
-  buttonGmail: {
-    padding: 15,
-    marginHorizontal: 40,
-    marginTop: 10,
-    backgroundColor: "white",
-    borderRadius: 15,
   },
 });

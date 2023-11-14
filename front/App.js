@@ -20,8 +20,8 @@ export default function App() {
     <utilsContext.Provider value={{ data, setData }}>
       <NavigationContainer>
         <Stack.Navigator>
-          <Stack.Screen name="Home" component={HomePage} />
           <Stack.Screen name="StartPage" component={StartPage} />
+          <Stack.Screen name="Home" component={HomePage} />
           <Stack.Screen name="Register" component={SignUp} />
           <Stack.Screen name="Login" component={Login} />
         </Stack.Navigator>

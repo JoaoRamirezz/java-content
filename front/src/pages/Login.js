@@ -3,12 +3,12 @@ import {
   StyleSheet,
   ImageBackground,
   View,
-  Button,
   TouchableOpacity,
   Text,
 } from "react-native";
 
-import { PaperProvider, TextInput } from "react-native-paper";
+import Input from "../components/Input";
+import Button from "../components/Button";
 
 export default function Login(props) {
   return (
@@ -21,23 +21,23 @@ export default function Login(props) {
           source={require("../../assets/Logo.png")}
           style={styleLogin.image}
         />
-        <TextInput
-          style={styleLogin.input}
-          label="Username or E-mail"
-          secureTextEntry
-          left={<TextInput.Icon icon="account" />}
+
+        <Input
+          text="Username or E-mail"
+          icon="account"
         />
-        <TextInput
-          style={styleLogin.input}
-          label="Password"
-          secureTextEntry
-          left={<TextInput.Icon icon="form-textbox-password" />}
+
+        <Input
+          text="Password"
+          icon="form-textbox-password"
         />
 
         <View style={styleLogin.options}>
-          <TouchableOpacity style={styleLogin.button} onPress={() => props.navigation.navigate("Home")}>
-            <Text style={styleLogin.textButton}>Login</Text>
-          </TouchableOpacity>
+          <Button
+            text="Login"
+            color="#3786e4"
+            textColor="white"
+          />
         </View>
       </ImageBackground>
     </View>
@@ -86,29 +86,5 @@ const styleLogin = StyleSheet.create({
   bg: {
     flex: 1,
     justifyContent: "center",
-  },
-
-  button: {
-    padding: 15,
-    marginHorizontal: 40,
-    marginTop: 10,
-    backgroundColor: "#3786E4",
-    borderRadius: 15,
-  },
-
-  buttonSoundCloud: {
-    padding: 15,
-    marginHorizontal: 40,
-    marginTop: 50,
-    backgroundColor: "#ff7700",
-    borderRadius: 15,
-  },
-
-  buttonGmail: {
-    padding: 15,
-    marginHorizontal: 40,
-    marginTop: 10,
-    backgroundColor: "white",
-    borderRadius: 15,
   },
 });
