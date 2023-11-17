@@ -20,6 +20,9 @@ const SearchBarComponent = () => {
 const styleSearch = StyleSheet.create({
     all:{
         display: 'flex',
+        marginTop: 30,
+        width: "80%",
+        alignSelf: "center "
     }
 })
 

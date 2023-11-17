@@ -13,6 +13,8 @@ import { BiLogoGmail } from "react-icons/bi";
 import ButtonIcon from "../components/ButtonIcon";
 import Button from "../components/Button";
 
+import { ColorsApp } from "../../helpers/ColorsApp";
+
 export default function StartPage(props) {
   return (
     <View style={styleStartPage.container}>
@@ -27,15 +29,14 @@ export default function StartPage(props) {
         <View style={styleStartPage.options}>
 
           <Button
-            
             navigateTo="Login"
             text="Login"
-            color="#3786e4"
+            color={ColorsApp.mainButton}
             textColor="white"
           />
 
           <ButtonIcon
-            color="#ff7700"
+            color={ColorsApp.soundcloudButton}
             textColor="white"
             top={50}
             icon={<ImSoundcloud style={styleStartPage.icon} />}
@@ -44,7 +45,7 @@ export default function StartPage(props) {
           />
 
           <ButtonIcon
-            color="white"
+            color={ColorsApp.gmailButton}
             textColor="red"
             top={10}
             icon={<BiLogoGmail style={styleStartPage.iconGmail} />}
@@ -57,6 +58,7 @@ export default function StartPage(props) {
               <b> Sign Up! </b>
             </TouchableOpacity>
           </Text>
+          
         </View>
       </ImageBackground>
     </View>

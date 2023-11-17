@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { BottomNavigation, Text } from 'react-native-paper';
+import { BottomNavigation } from 'react-native-paper';
 import Users from '../pages/Users';
 import Account from '../pages/Account';
 import Search from '../pages/Search';
@@ -16,10 +16,10 @@ const AccountRoute = () => <Account/>;
 const BottomNav = () => {
   const [index, setIndex] = React.useState(0);
   const [routes] = React.useState([
-    { key: 'account', title: 'Account', focusedIcon: 'account', unfocusedIcon: 'account-outline' },
-    { key: 'search', title: 'Search', focusedIcon: 'magnify' },
-    { key: 'home', title: 'Home', focusedIcon: 'home', unfocusedIcon: 'home-outline'},
     { key: 'discovery', title: 'Discovery', focusedIcon: 'earth' },
+    { key: 'home', title: 'Home', focusedIcon: 'home', unfocusedIcon: 'home-outline'},
+    { key: 'search', title: 'Search', focusedIcon: 'magnify' },
+    { key: 'account', title: 'Account', focusedIcon: 'account', unfocusedIcon: 'account-outline' },
   ]);
 
   const renderScene = BottomNavigation.SceneMap({
@@ -27,6 +27,7 @@ const BottomNav = () => {
     search: SearchRoute,
     discovery: DiscoveryRoute,
     account: AccountRoute,
+    prices: AccountRoute,
   });
 
   return (

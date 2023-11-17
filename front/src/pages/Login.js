@@ -2,11 +2,10 @@ import {
   Image,
   StyleSheet,
   ImageBackground,
-  View,
-  TouchableOpacity,
-  Text,
+  View
 } from "react-native";
 
+import { ColorsApp } from "../../helpers/ColorsApp";
 import Input from "../components/Input";
 import Button from "../components/Button";
 
@@ -34,8 +33,10 @@ export default function Login(props) {
 
         <View style={styleLogin.options}>
           <Button
+            top={10}
+            navigateTo="Home"
             text="Login"
-            color="#3786e4"
+            color={ColorsApp.mainButton}
             textColor="white"
           />
         </View>

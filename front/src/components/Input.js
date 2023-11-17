@@ -7,7 +7,6 @@ export default function Input(props) {
         <TextInput
             style={TextStyle.input}
             label={props.text}
-
             secureTextEntry
             left={<TextInput.Icon icon={props.icon} />}
         />
@@ -21,5 +20,6 @@ const TextStyle = StyleSheet.create({
         padding: 0,
         height: 50,
         borderRadius: 5,
+        backgroundColor: "rgba(255,255,255,0.5)"
     },
 })
