@@ -15,22 +15,14 @@ public class UserService {
     private UserRepository userRepository;
 
     public UserModel save(UserModel userModel){
-        return this.userRepository.save(userModel);
+        return userRepository.save(userModel);
     }
-
-    public void save(String name, String email, String password, String typeUser, String genre, String cpf){
-        this.userRepository.save(new UserModel(name, email, password, typeUser, genre, cpf));
-    }
-
+    
     public List<UserModel> findAll(){
         return (List<UserModel>) this.userRepository.findAll();
     }
 
-    public List<UserModel> findByName(String name){
-        return (List<UserModel>) this.userRepository.findByName(name);
-    }
-
-    public List<UserModel> findByAgeAndName(String name, short age){
-        return (List<UserModel>) this.userRepository.findByAgeAndName(name, age);
+    public List<UserModel> Login (String email, String password){
+        return (List<UserModel>) this.userRepository.findByName(email);
     }
 }

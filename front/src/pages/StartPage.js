@@ -12,10 +12,27 @@ import { BiLogoGmail } from "react-icons/bi";
 
 import ButtonIcon from "../components/ButtonIcon";
 import Button from "../components/Button";
-
 import { ColorsApp } from "../../helpers/ColorsApp";
 
+import * as Google from "expo-google-app-auth";
+
 export default function StartPage(props) {
+
+  const signInAsync = async () => {
+    try {
+      const { type, user } = await Google.logInAsync({
+        iosClientId: `485387033166-133ff288g37ae3slitttu34e4ja8jarv.apps.googleusercontent.com`,
+        androidClientId: `485387033166-9dnsshtpnerlavnjuviev3gfjfpeta2u.apps.googleusercontent.com`,
+      });
+
+      if (type === "success") {
+        navigation.navigate("Home", { user });
+      }
+    } catch (error) {
+      console.error("error with login", error);
+    }
+  };
+
   return (
     <View style={styleStartPage.container}>
       <ImageBackground
@@ -50,6 +67,7 @@ export default function StartPage(props) {
             top={10}
             icon={<BiLogoGmail style={styleStartPage.iconGmail} />}
             text="Gmail"
+            onPress={signInAsync}
           />
 
           <Text style={styleStartPage.textButtonLogin}>

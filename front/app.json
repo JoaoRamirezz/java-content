@@ -15,6 +15,11 @@
       "**/*"
     ],
     "ios": {
+      "config": {
+        "googleSignIn": {
+          "reservedClientId": "com.googleusercontent.apps.485387033166-133ff288g37ae3slitttu34e4ja8jarv"
+        }
+      },
       "supportsTablet": true
     },
     "android": {
@@ -25,6 +30,11 @@
     },
     "web": {
       "favicon": "./assets/favicon.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "9fe58e51-897b-4901-b393-7ba7eb9d95ba"
+      }
     }
   }
 }

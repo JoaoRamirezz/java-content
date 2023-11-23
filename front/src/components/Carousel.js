@@ -1,5 +1,7 @@
 import SwiperFlatList from "react-native-swiper-flatlist"
 import { Dimensions, StyleSheet, View, Text } from "react-native"
+import Button from "./Button"
+import { ColorsApp } from "../../helpers/ColorsApp"
 
 export default function Carousel(props) {
     var arr = props.array
@@ -9,7 +11,7 @@ export default function Carousel(props) {
         <>
             <SwiperFlatList
                 autoplay
-                autoplayDelay={2}
+                autoplayDelay={4}
                 autoplayLoop
                 index={2}
                 data={arr}
@@ -19,9 +21,16 @@ export default function Carousel(props) {
                         <Text style={styles(color).age}>{item.age}</Text>
                         <Text style={styles(color).city}>{item.city}</Text>
                         <Text style={styles(color).typeUser}>{item.typeUser}</Text>
+                        <Button
+                            top={10}
+                            navigateTo="Home"
+                            text="add"
+                            color={ColorsApp.mainButton}
+                            textColor="white"/>
                     </View>
                 )}
             />
+
         </>
     )
 }
@@ -29,35 +38,39 @@ export default function Carousel(props) {
 const { width } = Dimensions.get('window');
 
 const styles = (color) => StyleSheet.create({
-    container: { 
-        flex: 1, 
-        backgroundColor: 'white' 
+    container: {
+        flex: 1,
+        backgroundColor: 'white'
     },
 
     child: {
         backgroundColor: color,
         height: 200,
-        width, 
+        width,
         justifyContent: 'center',
     },
 
-    name: { 
-        fontSize: 40, 
-        textAlign: 'center' 
+    name: {
+        fontSize: 40,
+        textAlign: 'center'
     },
 
-    age: { 
-        fontSize: 15, 
-        textAlign: 'center' 
+    age: {
+        fontSize: 15,
+        textAlign: 'center'
     },
 
-    city: { 
-        fontSize: 17, 
-        textAlign: 'center' 
+    city: {
+        fontSize: 17,
+        textAlign: 'center'
     },
-    
-    typeUser: { 
-        fontSize: 17, 
-        textAlign: 'center' 
+
+    typeUser: {
+        fontSize: 17,
+        textAlign: 'center'
     },
+
+    buttonAdd: {
+        width: "50%"
+    }
 });

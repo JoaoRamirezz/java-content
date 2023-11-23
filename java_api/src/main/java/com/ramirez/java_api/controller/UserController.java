@@ -12,7 +12,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.ramirez.java_api.model.UserLogin;
 import com.ramirez.java_api.model.UserModel;
+import com.ramirez.java_api.repository.UserRepository;
 import com.ramirez.java_api.service.UserService;
 
 @RestController
@@ -21,22 +23,24 @@ public class UserController {
     @Autowired
     private UserService UserService;
 
+    @GetMapping("")
+    public void test() {
+        System.out.println("deu boa");
+    }
+
     @GetMapping("/findUsers")
-    public List<UserModel> getAllUser(){
+    public List<UserModel> getAllUser() {
         List<UserModel> listRes = UserService.findAll();
         return listRes;
     }
 
-    @GetMapping("")
-    public void test(){
-        System.out.println("deu boa");
-    }
-
     @PostMapping("/newuser")
-    public void newUser(@RequestBody UserModel newUser){
-        System.out.println(newUser);
+    public void newUser(@RequestBody UserModel newUser) {
         UserService.save(newUser);
     }
-    
-    
+
+    @PostMapping("/login")
+    public void tryLogin(@RequestBody UserLogin login) {
+        UserService.Login(login.email(), login.password());
+    }
 }

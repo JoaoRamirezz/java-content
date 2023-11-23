@@ -2,33 +2,59 @@ import {
   Image,
   StyleSheet,
   ImageBackground,
-  View
+  View,
+  Text
 } from "react-native";
 
+import { useState } from "react";
 import { ColorsApp } from "../../helpers/ColorsApp";
 import Input from "../components/Input";
 import Button from "../components/Button";
+import BackArrow from "../components/BackArrow"
+import { SignUp } from "./SignUp";
 
 export default function Login(props) {
+
+  const [email, setEmail] = useState()
+  const [password, setPassword] = useState()
+
+
+  const tryLogin = async() => {
+    const data={
+      "email": email,
+      "password": password
+    }
+
+    const res = await axios.post("http://localhost:8080/api/login", data);
+    if(res.status == 201){
+      props.navigation.navigate("Home")
+    }
+
+    console.log(res)
+  }
+
   return (
     <View style={styleLogin.container}>
       <ImageBackground
         source={require("../../assets/bg.jpg")}
         style={styleLogin.bg}
       >
+        <BackArrow />
         <Image
           source={require("../../assets/Logo.png")}
           style={styleLogin.image}
         />
-
         <Input
           text="Username or E-mail"
           icon="account"
+          onChangeText={setEmail}
         />
 
         <Input
           text="Password"
           icon="form-textbox-password"
+          onChangeText={setPassword}
+          isSecurity
         />
 
         <View style={styleLogin.options}>
@@ -38,6 +64,7 @@ export default function Login(props) {
             text="Login"
             color={ColorsApp.mainButton}
             textColor="white"
+            onPress={tryLogin}
           />
         </View>
       </ImageBackground>

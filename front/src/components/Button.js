@@ -5,11 +5,14 @@ export default function Button(props) {
     var buttonColor = props.color
     var textColor = props.textColor
     var marginTop = props.top
+
+    
     var nav = props.navigateTo
     var navigation = useNavigation()
+    var onPress = props.onPress
 
     return (
-        <TouchableOpacity style={styleButton(buttonColor, textColor, marginTop).button} onPress={() => navigation.navigate(nav)}>
+        <TouchableOpacity style={styleButton(buttonColor, textColor, marginTop).button} onPress={navigation ? () => navigation.navigate(nav) : onPress}>
             <Text style={styleButton(buttonColor, textColor, marginTop).textButton}>{props.text}</Text>
         </TouchableOpacity>
     )

@@ -9,7 +9,7 @@ const SearchBarComponent = () => {
 
   return (
     <Searchbar
-      placeholder="Search"
+      placeholder="Busque Musicos/Produtores"
       onChangeText={onChangeSearch}
       value={searchQuery}
       style={styleSearch.all}

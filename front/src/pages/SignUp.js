@@ -2,7 +2,9 @@ import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
 import { useState } from "react";
 import axios from "axios";
 import { Picker } from "@react-native-picker/picker";
-import { PaperProvider, TextInput } from "react-native-paper";
+import { TextInput } from "react-native-paper";
+import Button from "../components/Button";
+import { ColorsApp } from "../../helpers/ColorsApp";
 
 export function SignUp(props) {
   const [name, setNome] = useState("");
@@ -13,11 +15,7 @@ export function SignUp(props) {
   const [genre, setGenre] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
 
-  const genres = ["Masculine", "Feminine", "Other"];
-  const typeUser = ["Musician", "Producer", "Event Organizer", "Other"];
-
   const signUp = async () => {
-    console.log("deu boa 2");
 
     if (password !== confirmPassword) {
       console.log("senhas diferentes");
@@ -30,18 +28,19 @@ export function SignUp(props) {
       password,
       type,
       genre,
+      type,
     };
 
     const res = await axios.post("http://localhost:8080/api/newuser", data);
     if (res.status === 201) {
       // sessionStorage.setItem("token", res.data)
-      // props.navigation.navigate("Login");
+      props.navigation.navigate("Login");
     }
     console.log(data);
   };
 
   return (
-    
+
     <View style={styleSignUp.bg}>
       <TextInput
         mode="outlined"
@@ -87,7 +86,7 @@ export function SignUp(props) {
         <Picker.Item label="Other" value="Other" />
       </Picker>
 
-      
+
       <TextInput
         mode="outlined"
         label="Password"
@@ -105,9 +104,14 @@ export function SignUp(props) {
       />
 
       <View style={styleSignUp.buttonLogin}>
-        <TouchableOpacity style={styleSignUp.button} onPress={() => signUp()}>
-          <Text style={styleSignUp.textbutton}>Sign Up</Text>
-        </TouchableOpacity>
+        <Button
+          top={10}
+          navigateTo="Home"
+          text="Login"
+          color={ColorsApp.mainButton}
+          textColor="white"
+          onPress = {signUp()}
+        />
 
         <TouchableOpacity
           style={styleSignUp.button1}
@@ -147,14 +151,6 @@ const styleSignUp = StyleSheet.create({
   textView: {
     marginLeft: 40,
     marginTop: 20,
-  },
-
-  button: {
-    padding: 10,
-    marginHorizontal: 40,
-    marginTop: 40,
-    backgroundColor: "#176585",
-    borderRadius: 20,
   },
 
   button1: {

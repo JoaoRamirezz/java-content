@@ -7,8 +7,9 @@ export default function Input(props) {
         <TextInput
             style={TextStyle.input}
             label={props.text}
-            secureTextEntry
-            left={<TextInput.Icon icon={props.icon} />}
+            secureTextEntry={props.isSecurity}
+            onChangeText={props.onChangeText}
+            left={<TextInput.Icon icon={props.icon}/>}
         />
     )
 }

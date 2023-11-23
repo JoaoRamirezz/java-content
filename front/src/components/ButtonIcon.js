@@ -1,3 +1,4 @@
+import { useNavigation } from "@react-navigation/native"
 import { TouchableOpacity, StyleSheet, Text } from "react-native"
 
 export default function ButtonIcon(props) {
@@ -6,8 +7,13 @@ export default function ButtonIcon(props) {
     var marginTop = props.top
     var icon = props.icon
     var text = props.text
+
+    var nav = props.navigation
+    var navigation = useNavigation()
+    var onPress = props.onPress
+
     return (
-        <TouchableOpacity style={styleButton(buttonColor, textColor, marginTop).button}>
+        <TouchableOpacity style={styleButton(buttonColor, textColor, marginTop).button} onPress={navigation ? () => navigation.navigate(nav) : onPress}>
             <Text style={styleButton(buttonColor, textColor, marginTop).textButton}>
                 {icon}
                 {text}
