@@ -7,7 +7,6 @@ import BackArrow from "../components/BackArrow";
 export default function HomePage() {
     return (
         <>
-            <TopNav />
             <BottomNav />
         </>
     )

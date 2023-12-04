@@ -12,20 +12,20 @@ export default function Button(props) {
     var onPress = props.onPress
 
     return (
-        <TouchableOpacity style={styleButton(buttonColor, textColor, marginTop).button} onPress={navigation ? () => navigation.navigate(nav) : onPress}>
+        <TouchableOpacity style={styleButton(buttonColor, textColor, marginTop).button} onPress={nav ? () => navigation.navigate(nav) : onPress}>
             <Text style={styleButton(buttonColor, textColor, marginTop).textButton}>{props.text}</Text>
         </TouchableOpacity>
     )
 }
 
 
-const styleButton = (color, textColor, Top) => StyleSheet.create({
+const styleButton = (color, textColor, Top, size) => StyleSheet.create({
     button: {
         padding: 15,
         marginHorizontal: 40,
         marginTop: Top,
         backgroundColor: color,
-        borderRadius: 15,
+        borderRadius: 15
     },
 
     textButton: {

@@ -4,7 +4,6 @@ import { StyleSheet } from 'react-native';
 
 const SearchBarComponent = () => {
   const [searchQuery, setSearchQuery] = React.useState('');
-
   const onChangeSearch = query => setSearchQuery(query);
 
   return (

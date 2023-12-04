@@ -2,8 +2,7 @@ import {
   Image,
   StyleSheet,
   ImageBackground,
-  View,
-  Text
+  View
 } from "react-native";
 
 import { useState } from "react";
@@ -11,7 +10,9 @@ import { ColorsApp } from "../../helpers/ColorsApp";
 import Input from "../components/Input";
 import Button from "../components/Button";
 import BackArrow from "../components/BackArrow"
-import { SignUp } from "./SignUp";
+import axios from "axios";
+import jwtDecode from 'jwt-decode'
+
 
 export default function Login(props) {
 
@@ -19,18 +20,17 @@ export default function Login(props) {
   const [password, setPassword] = useState()
 
 
-  const tryLogin = async() => {
-    const data={
-      "email": email,
-      "password": password
+  async function tryLogin() {
+    const data = {
+      email,
+      password
     }
 
     const res = await axios.post("http://localhost:8080/api/login", data);
-    if(res.status == 201){
+    if (res.status == 200) {
+      sessionStorage.setItem("token",res.data)
       props.navigation.navigate("Home")
     }
-
-    console.log(res)
   }
 
   return (
@@ -60,7 +60,6 @@ export default function Login(props) {
         <View style={styleLogin.options}>
           <Button
             top={10}
-            navigateTo="Home"
             text="Login"
             color={ColorsApp.mainButton}
             textColor="white"

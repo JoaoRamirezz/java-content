@@ -17,7 +17,18 @@ public interface UserRepository extends MongoRepository<UserModel, String>{
     List<UserModel> findByAgeAndName(String name, short age);
 
     @Query("{'email': ?0, 'password': ?1}")
-    List<UserModel> Login(String email, String password);
+    UserModel Login(String email, String password);
 
+    @Query("{'email': ?0}")
+    UserModel findByEmail(String email);
+
+    @Query("{'city': ?0}")
+    List<UserModel> findByCity(String city);
+
+    @Query("{'musicalGenre': ?0}")
+    List<UserModel> findByGenre(String genre);
+
+    @Query("{'userName': ?0}")
+    UserModel findByUsername(String name);
 
 }

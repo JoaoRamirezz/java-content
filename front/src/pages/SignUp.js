@@ -6,7 +6,11 @@ import { TextInput } from "react-native-paper";
 import Button from "../components/Button";
 import { ColorsApp } from "../../helpers/ColorsApp";
 
+
+
+
 export function SignUp(props) {
+  const [userName, setUserName] = useState("")
   const [name, setNome] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -14,9 +18,13 @@ export function SignUp(props) {
   const [type, setType] = useState("");
   const [genre, setGenre] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+  const [city, setCity] = useState("");
+  const [musicalGenre, setMusicalGenre] = useState("");
 
-  const signUp = async () => {
 
+
+
+  async function UsersignUp() {
     if (password !== confirmPassword) {
       console.log("senhas diferentes");
     }
@@ -29,18 +37,25 @@ export function SignUp(props) {
       type,
       genre,
       type,
+      userName,
+      city,
+      musicalGenre
     };
 
-    const res = await axios.post("http://localhost:8080/api/newuser", data);
-    if (res.status === 201) {
-      // sessionStorage.setItem("token", res.data)
-      props.navigation.navigate("Login");
-    }
-    console.log(data);
+    await axios.post("http://localhost:8080/api/newuser", data).then(res => {
+      console.log(res)
+      if (res.status === 200) {
+        // sessionStorage.setItem("token", res.data)
+        props.navigation.navigate("Login");
+      }
+    });
+
   };
 
-  return (
 
+
+
+  return (
     <View style={styleSignUp.bg}>
       <TextInput
         mode="outlined"
@@ -55,7 +70,7 @@ export function SignUp(props) {
         label="Username"
         style={styleSignUp.input}
         maxLength={20}
-        onChangeText={(text) => setNome(text)}
+        onChangeText={(text) => setUserName(text)}
       />
 
       <TextInput
@@ -65,7 +80,8 @@ export function SignUp(props) {
         onChangeText={(text) => setEmail(text)}
       />
 
-      <Picker style={styleSignUp.pickerStyles}>
+      <Picker style={styleSignUp.pickerStyles} onValueChange={(text) => setType(text)}>
+        <Picker.Item label="Tipo de Usuário..." value="" />
         <Picker.Item label="Producer" value="Producer" />
         <Picker.Item label="Musician" value="Musician" />
         <Picker.Item label="Event Organizer" value="Event Organizer" />
@@ -80,10 +96,20 @@ export function SignUp(props) {
         onChangeText={(text) => setCPF(text)}
       />
 
-      <Picker style={styleSignUp.pickerStyles}>
+      <Picker style={styleSignUp.pickerStyles} onValueChange={(text) => setGenre(text)}>
+        <Picker.Item label="Genero..." value="" />
         <Picker.Item label="Feminine" value="Feminine" />
         <Picker.Item label="Masculine" value="Masculine" />
         <Picker.Item label="Other" value="Other" />
+      </Picker>
+
+      <Picker style={styleSignUp.pickerStyles} onValueChange={(text) => setMusicalGenre(text)}>
+        <Picker.Item label="Genero Musical..." value="" />
+        <Picker.Item label="Trap" value="Trap" />
+        <Picker.Item label="Funk" value="Funk" />
+        <Picker.Item label="Rap" value="Rap" />
+        <Picker.Item label="Reggae" value="Reggae" />
+        <Picker.Item label="R&B" value="R&B" />
       </Picker>
 
 
@@ -103,14 +129,20 @@ export function SignUp(props) {
         secureTextEntry={true}
       />
 
+      <TextInput
+        mode="outlined"
+        label="Cidade"
+        style={styleSignUp.input}
+        onChangeText={(text) => setCity(text)}
+      />
+
       <View style={styleSignUp.buttonLogin}>
         <Button
           top={10}
-          navigateTo="Home"
           text="Login"
           color={ColorsApp.mainButton}
           textColor="white"
-          onPress = {signUp()}
+          onPress={() => UsersignUp()}
         />
 
         <TouchableOpacity

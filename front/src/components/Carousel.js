@@ -18,9 +18,8 @@ export default function Carousel(props) {
                 renderItem={({ item }) => (
                     <View style={styles(color).child}>
                         <Text style={styles(color).name}>{item.name}</Text>
-                        <Text style={styles(color).age}>{item.age}</Text>
-                        <Text style={styles(color).city}>{item.city}</Text>
-                        <Text style={styles(color).typeUser}>{item.typeUser}</Text>
+                        <Text style={styles(color).age}>{item.userName}</Text>
+                        <Text style={styles(color).typeUser}>{item.type}</Text>
                         <Button
                             top={10}
                             navigateTo="Home"

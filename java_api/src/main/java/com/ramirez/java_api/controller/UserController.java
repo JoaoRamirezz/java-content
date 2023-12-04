@@ -1,20 +1,20 @@
 package com.ramirez.java_api.controller;
 
-import java.sql.Date;
 import java.util.List;
-
-import org.apache.catalina.User;
+import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.ramirez.java_api.model.CreateUser;
 import com.ramirez.java_api.model.UserLogin;
 import com.ramirez.java_api.model.UserModel;
-import com.ramirez.java_api.repository.UserRepository;
+import com.ramirez.java_api.service.JwtService;
 import com.ramirez.java_api.service.UserService;
 
 @RestController
@@ -23,24 +23,64 @@ public class UserController {
     @Autowired
     private UserService UserService;
 
-    @GetMapping("")
-    public void test() {
-        System.out.println("deu boa");
+    @Autowired
+    private JwtService jwtService;
+
+    @PostMapping("/searchUser")
+    public UserModel searchUser(@RequestBody String username) {
+        var user = username.replace("=", "");
+        UserModel resultUser = UserService.findbyUsername(user);
+        return resultUser;
+    }
+    @GetMapping("/findCity")
+    public List<UserModel> getByCity(@RequestHeader("Authorization") String token) {
+        var tokenOk = token.replace("Bearer ", "");
+        String email = jwtService.validateToken(tokenOk);
+        UserModel user = UserService.findByEmail(email);
+        List<UserModel> listUsers = UserService.findByCity(user.getCity());
+        return JwtService.GetRandomUsers(listUsers, user.getName());
     }
 
-    @GetMapping("/findUsers")
+    @GetMapping("/findGenre")
+    public List<UserModel> getByGenre(@RequestHeader("Authorization") String token) {
+        var tokenOk = token.replace("Bearer ", "");
+        String email = jwtService.validateToken(tokenOk);
+        UserModel user = UserService.findByEmail(email);
+        List<UserModel> listUsers = UserService.findByGenre(user.getMusicalGenre());
+        return JwtService.GetRandomUsers(listUsers, user.getName());
+    }
+
+    @GetMapping("/userData")
+    public UserModel getUSerData(@RequestHeader("Authorization") String token) {
+        var tokenOk = token.replace("Bearer ", "");
+        String email = jwtService.validateToken(tokenOk);
+        UserModel user = UserService.findByEmail(email);
+        return user;
+    }
+
+    @GetMapping("/findAll")
     public List<UserModel> getAllUser() {
         List<UserModel> listRes = UserService.findAll();
         return listRes;
     }
 
     @PostMapping("/newuser")
-    public void newUser(@RequestBody UserModel newUser) {
-        UserService.save(newUser);
+    public UserModel newUser(@RequestBody CreateUser data) {
+        int workFactor = 12;
+        var newUser = new UserModel(data, BCrypt.hashpw(data.password(), BCrypt.gensalt(workFactor)),
+                BCrypt.hashpw(data.cpf(), BCrypt.gensalt(workFactor)));
+        UserModel user = UserService.save(newUser);
+        return user;
     }
 
     @PostMapping("/login")
-    public void tryLogin(@RequestBody UserLogin login) {
-        UserService.Login(login.email(), login.password());
+    public ResponseEntity<String> tryLogin(@RequestBody UserLogin login) {
+        UserModel user = UserService.findByEmail(login.email());
+        if (BCrypt.checkpw(login.password(), user.getPassword())) {
+            String token = this.jwtService.genToken(user);
+            return ResponseEntity.ok(token);
+        }
+        return ResponseEntity.badRequest().build();
     }
+
 }

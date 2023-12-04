@@ -12,7 +12,7 @@ import StartPage from "./src/pages/StartPage";
 import Login from "./src/pages/Login";
 import HomePage from "./src/pages/HomePage";
 import Prices from "./src/pages/Prices";
-import NewPromo from "./src/pages/NewPromo";
+import NewPrice from "./src/pages/NewPrice";
 
 
 
@@ -26,12 +26,12 @@ export default function App() {
         <utilsContext.Provider value={{ data, setData }}>
           <NavigationContainer>
             <Stack.Navigator screenOptions={{ headerShown: false }}>
-              <Stack.Screen name="Login" component={Login} />
-              <Stack.Screen name="Home" component={HomePage} />
               <Stack.Screen name="StartPage" component={StartPage} />
+              <Stack.Screen name="Home" component={HomePage} />
+              <Stack.Screen name="Login" component={Login} />
               <Stack.Screen name="Register" component={SignUp} />
               <Stack.Screen name="Prices" component={Prices} />
-              <Stack.Screen name="NewPromo" component={NewPromo} />
+              <Stack.Screen name="NewPrice" component={NewPrice} />
             </Stack.Navigator>
           </NavigationContainer>
         </utilsContext.Provider >

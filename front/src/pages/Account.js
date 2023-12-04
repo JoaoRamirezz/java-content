@@ -3,16 +3,30 @@ import { Avatar } from "react-native-paper";
 import { View, StyleSheet, Text, TouchableOpacity } from "react-native";
 import Button from "../components/Button";
 import { ColorsApp } from "../../helpers/ColorsApp";
-import { IoAddOutline } from "react-icons/io5";
 import { useNavigation } from "@react-navigation/native"
-import { useContext } from "react";
-import { utilsContext } from "../../contexts/SignUpContext";
+import { useState, useEffect } from "react";
+import axios from "axios";
 
 
 
 
 export default function Account() {
   var navigation = useNavigation()
+  const [user, setUser] = useState({});
+
+  useEffect(() => {
+    async function findUser() {
+      var jwt = sessionStorage.getItem("token")
+      await axios.get("http://localhost:8080/api/userData", { headers: { Authorization: "Bearer " + jwt } }).then((res) => {
+        if (res.status == 200) {
+          setUser(res.data)
+        }
+      });
+    }
+    findUser()
+  }, [])
+
+
   return (
     <View style={styleAccount.AccountContent}>
       <View style={styleAccount.Image}>
@@ -21,8 +35,8 @@ export default function Account() {
 
 
       <View>
-        <Text style={styleAccount.Name}>Fulano</Text>
-        <Text style={styleAccount.Function}>Produtor</Text>
+        <Text style={styleAccount.Name}>{user.name}</Text>
+        <Text style={styleAccount.Function}>{user.type}</Text>
       </View>
 
 
@@ -36,29 +50,11 @@ export default function Account() {
         />
       </View>
 
-
-      <TouchableOpacity style={styleAccount.buttonNew} onPress={() => navigation.navigate("NewPromo")}>
-        <IoAddOutline style={styleAccount.icon} />
-      </TouchableOpacity>
-
     </View>
   );
 }
 
 const styleAccount = StyleSheet.create({
-  icon: {
-    fontSize: 70,
-    color: "white"
-  },
-
-  buttonNew: {
-    position: "fixed",
-    marginTop: 600,
-    alignSelf: "flex-end",
-    marginRight: 40,
-    backgroundColor: "#3786e4",
-    borderRadius: "100%"
-  },
 
   AccountContent: {
     alignItems: "center",
